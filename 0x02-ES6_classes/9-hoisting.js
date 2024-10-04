@@ -11,10 +11,6 @@ export class HolbertonClass {
   get location() {
     return this._location;
   }
-
-  toString() {
-    return `${this._year} - ${this._location}`;
-  }
 }
 
 export class StudentHolberton {
@@ -29,7 +25,7 @@ export class StudentHolberton {
   }
 
   get holbertonClass() {
-    return this._holbertonClass.toString;
+    return this._holbertonClass;
   }
 
   get fullStudentDescription() {
