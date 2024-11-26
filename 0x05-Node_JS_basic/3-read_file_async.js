@@ -13,8 +13,7 @@ async function countStudents(fileName) {
     const lines = data.split('\n').filter((line) => line.trim() !== '');
 
     if (lines.length < 2) {
-      console.log('No data available in the file');
-      return;
+      return 'No data available in the file';
     }
 
     const header = lines[0].split(',');
@@ -23,8 +22,7 @@ async function countStudents(fileName) {
     const fieldIndex = header.indexOf('field');
     const firstnameIndex = header.indexOf('firstname');
     if (fieldIndex === -1 || firstnameIndex === -1) {
-      console.log('The file is missing required fields');
-      return;
+      throw new Error('The file is missing required fields');
     }
 
     const students = rows.map((line) => {
@@ -36,7 +34,7 @@ async function countStudents(fileName) {
     });
 
     const totalStudents = students.length;
-    console.log(`Number of students: ${totalStudents}`);
+    let result = `Number of students: ${totalStudents}`;
 
     const fieldCounts = students.reduce((acc, student) => {
       const { field } = student;
@@ -46,10 +44,10 @@ async function countStudents(fileName) {
     }, {});
 
     for (const [field, names] of Object.entries(fieldCounts)) {
-      console.log(
-        `Number of students in ${field}: ${names.length}. List: ${names.join(', ')}`,
-      );
+      result += `\nNumber of students in ${field}: ${names.length}. List: ${names.join(', ')}`;
     }
+    console.log(result);
+    return result;
   } catch (error) {
     throw new Error('Cannot load the database');
   }
