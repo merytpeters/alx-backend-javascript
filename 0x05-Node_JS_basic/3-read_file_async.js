@@ -5,10 +5,6 @@ async function countStudents(fileName) {
     throw new Error('Cannot load the database');
   }
   try {
-    // if (!fs.existsSync(fileName)) {
-    // throw new Error('Cannot load the database');
-    // }
-
     const data = await fs.readFile(fileName, 'utf8');
     const lines = data.split('\n').filter((line) => line.trim() !== '');
 
@@ -22,7 +18,7 @@ async function countStudents(fileName) {
     const fieldIndex = header.indexOf('field');
     const firstnameIndex = header.indexOf('firstname');
     if (fieldIndex === -1 || firstnameIndex === -1) {
-      throw new Error('The file is missing required fields');
+      return 'The file is missing required fields';
     }
 
     const students = rows.map((line) => {
@@ -34,7 +30,7 @@ async function countStudents(fileName) {
     });
 
     const totalStudents = students.length;
-    let result = `Number of students: ${totalStudents}`;
+    let result = `Number of students: ${totalStudents}`.trim();
 
     const fieldCounts = students.reduce((acc, student) => {
       const { field } = student;
