@@ -9,7 +9,7 @@
   "author": "Edafe Merit",
   "license": "ISC",
   "devDependencies": {
-    "chai": "^5.1.2",
+    "chai": "^4.3.6",
     "mocha": "^10.8.2",
     "sinon": "^19.0.2"
   }
