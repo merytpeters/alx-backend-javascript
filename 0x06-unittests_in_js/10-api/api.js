@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 app.get('/', (req, res) => {
   res.send('Welcome to the payment system');
 });
@@ -18,6 +20,9 @@ app.get('/available_payments', (req, res) => {
 // /login route to handle POST request
 app.post('/login', (req, res) => {
   const { userName } = req.body;
+  if (!userName) {
+    return res.sen.status(404).send('Incorrect credentials');
+  }
   res.send(`Welcome ${userName}`);
 });
 
